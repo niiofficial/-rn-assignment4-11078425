@@ -30,5 +30,5 @@ Job Finder is a mobile application built with React Native that allows users to 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/job-finder-app.git
+   git clone https://github.com/niiofficial/-rn-assignment4-11078425.
 
