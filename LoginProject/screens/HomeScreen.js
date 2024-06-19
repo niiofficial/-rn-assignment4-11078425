@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const HomeScreen = ({ route }) => {
@@ -18,16 +18,14 @@ const HomeScreen = ({ route }) => {
   ];
 
   const popularJobs = [
-    { id: '1', company: 'Twitter', logo: 'https://example.com/twitter-logo.png', title: 'Social Media Manager', salary: '$90,000', location: 'Tema, Ghana', backgroundColor: '#1DA1F2' },
-    { id: '2', company: 'LinkedIn', logo: 'https://example.com/linkedin-logo.png', title: 'Business Analyst', salary: '$105,000', location: 'Tamale, Ghana', backgroundColor: '#0077B5' },
-    { id: '3', company: 'Snapchat', logo: 'https://example.com/snapchat-logo.png', title: 'Content Creator', salary: '$95,000', location: 'Kumasi, Ghana', backgroundColor: '#FFFC00' },
-    { id: '4', company: 'Spotify', logo: 'https://example.com/spotify-logo.png', title: 'Audio Engineer', salary: '$100,000', location: 'Takoradi, Ghana', backgroundColor: '#1DB954' },
-    { id: '5', company: 'Uber', logo: 'https://example.com/uber-logo.png', title: 'Operations Manager', salary: '$110,000', location: 'Cape Coast, Ghana', backgroundColor: '#000000' },
-    { id: '6', company: 'Airbnb', logo: 'https://example.com/airbnb-logo.png', title: 'Customer Support', salary: '$85,000', location: 'Sunyani, Ghana', backgroundColor: '#FF5A5F' },
-    { id: '7', company: 'Pinterest', logo: 'https://example.com/pinterest-logo.png', title: 'Graphic Designer', salary: '$95,000', location: 'Ho, Ghana', backgroundColor: '#BD081C' },
-    { id: '8', company: 'Reddit', logo: 'https://example.com/reddit-logo.png', title: 'Community Manager', salary: '$100,000', location: 'Koforidua, Ghana', backgroundColor: '#FF4500' },
-    { id: '9', company: 'Dropbox', logo: 'https://example.com/dropbox-logo.png', title: 'Cloud Architect', salary: '$120,000', location: 'Akim Oda, Ghana', backgroundColor: '#0061FF' },
-    { id: '10', company: 'Slack', logo: 'https://example.com/slack-logo.png', title: 'Product Designer', salary: '$110,000', location: 'Bolgatanga, Ghana', backgroundColor: '#611F69' },
+    { id: '1', company: 'Google', logo: 'https://example.com/google-logo.png', title: 'Software Engineer', salary: '$120,000', location: 'Accra, Ghana', backgroundColor: '#4285F4' },
+    { id: '2', company: 'Facebook', logo: 'https://example.com/facebook-logo.png', title: 'Product Manager', salary: '$130,000', location: 'Kasoa, Ghana', backgroundColor: '#4267B2' },
+    { id: '3', company: 'Amazon', logo: 'https://example.com/amazon-logo.png', title: 'Data Scientist', salary: '$115,000', location: 'Makola, Ghana', backgroundColor: '#FF9900' },
+    { id: '4', company: 'Apple', logo: 'https://example.com/apple-logo.png', title: 'UX Designer', salary: '$110,000', location: 'Abokobi, Ghana', backgroundColor: '#A2AAAD' },
+    { id: '5', company: 'Microsoft', logo: 'https://example.com/microsoft-logo.png', title: 'Cloud Engineer', salary: '$125,000', location: 'Wale Wale, WA', backgroundColor: '#737373' },
+    { id: '6', company: 'Netflix', logo: 'https://example.com/netflix-logo.png', title: 'DevOps Engineer', salary: '$128,000', location: 'Bukom, James Town', backgroundColor: '#E50914' },
+    { id: '7', company: 'Tesla', logo: 'https://example.com/tesla-logo.png', title: 'Mechanical Engineer', salary: '$118,000', location: 'Abetifi, Ga', backgroundColor: '#69fc0' },
+    { id: '8', company: 'Adobe', logo: 'https://example.com/adobe-logo.png', title: 'Graphic Designer', salary: '$100,000', location: 'Abeka, Lapaz', backgroundColor: '#FF0000' },
   ];
 
   const renderJobCard = ({ item }) => (
@@ -42,50 +40,59 @@ const HomeScreen = ({ route }) => {
     </View>
   );
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcomeText}>Welcome, {name}!</Text>
-      <Text style={styles.infoText}>Email: {email}</Text>
-      <Image 
-        source={require('../imgs/profile.jpg')} 
-        style={styles.profileImage} 
-      />
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBox}>
-          <Icon name="search" size={20} color="gray" style={styles.searchIcon} />
-          <TextInput 
-            style={styles.searchInput}
-            placeholder="search a job or position"
-          />
-        </View>
-        <TouchableOpacity style={styles.configBox}>
-          <Icon name="settings-outline" size={20} color="gray" />
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.featuredHeading}>Featured Jobs</Text>
-      <FlatList 
-        data={featuredJobs}
-        renderItem={renderJobCard}
-        keyExtractor={item => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.featuredJobsList}
-      />
-      <View style={styles.popularJobsHeader}>
-        <Text style={styles.popularHeading}>Popular Jobs</Text>
-        <TouchableOpacity>
-          <Text style={styles.seeAllText}>See All</Text>
-        </TouchableOpacity>
-      </View>
-      <FlatList 
-        data={popularJobs}
-        renderItem={renderJobCard}
-        keyExtractor={item => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.popularJobsList}
-      />
+  const renderPopularJobItem = ({ item }) => (
+    <View style={styles.verticalItemContainer}>
+      <Text style={styles.verticalItemTitle}>{item.title}</Text>
+      <Text style={styles.verticalItemTime}>{item.time}</Text>
     </View>
+  );
+
+  return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Text style={styles.welcomeText}>Welcome, {EricAtsu}!</Text>
+        <Text style={styles.infoText}>Email: {email}</Text>
+        <Image
+          source={require('../imgs/profile.jpg')}
+          style={styles.profileImage}
+        />
+        <View style={styles.searchContainer}>
+          <View style={styles.searchBox}>
+            <Icon name="search" size={20} color="gray" style={styles.searchIcon} />
+            <TextInput 
+              style={styles.searchInput}
+              placeholder="Search a job or position"
+            />
+          </View>
+          <TouchableOpacity style={styles.configBox}>
+            <Icon name="settings-outline" size={20} color="gray" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.featuredHeadingContainer}>
+          <Text style={styles.featuredHeading}>Featured Jobs</Text>
+          <Text style={styles.seeAllText}>See All</Text>
+        </View>
+        <FlatList
+          data={featuredJobs}
+          renderItem={renderJobCard}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.featuredJobsList}
+        />
+        <View style={styles.featuredHeadingContainer}>
+          <Text style={styles.featuredHeading}>Popular Jobs</Text>
+          <Text style={styles.seeAllText}>See All</Text>
+        </View>
+        <FlatList
+          data={popularJobs}
+          renderItem={renderPopularJobItem}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.verticalDataList}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -99,6 +106,10 @@ HomeScreen.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 20,
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
@@ -151,32 +162,28 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     padding: 10,
   },
-  featuredHeading: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 30,
-  },
-  featuredJobsList: {
-    marginTop: 10,
-  },
-  popularJobsHeader: {
+  featuredHeadingContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
+    justifyContent: 'space-between',
     marginTop: 30,
-    paddingHorizontal: 20,
   },
-  popularHeading: {
+  featuredHeading: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   seeAllText: {
     fontSize: 16,
-    color: 'blue',
+    color: 'gray',
+    left: 190,
   },
-  popularJobsList: {
+  featuredJobsList: {
     marginTop: 10,
+    marginBottom: 20,
+  },
+  verticalDataList: {
+    marginTop: 10,
+    marginBottom: 20,
   },
   card: {
     width: 280,
@@ -219,6 +226,22 @@ const styles = StyleSheet.create({
   cardLocation: {
     fontSize: 16,
     color: 'white',
+  },
+  verticalItemContainer: {
+    backgroundColor: '#f2f2f2',
+    padding: 20,
+    marginVertical: 5,
+    borderRadius: 10,
+    width: '100%',
+  },
+  verticalItemTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  verticalItemTime: {
+    fontSize: 14,
+    color: 'gray',
+    marginTop: 5,
   },
 });
 
