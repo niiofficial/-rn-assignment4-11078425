@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, StatusBar, Platform, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icons
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const App = () => {
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Handle login logic here
-    Alert.alert('Login Button Pressed', `Username: ${username}\nPassword: ${password}`);
+    // Navigate to Home screen regardless of input
+    navigation.navigate('Home', { name: 'User', email: username });
   };
 
   return (
@@ -27,7 +27,7 @@ const App = () => {
 
         {/* Login Content */}
         <View style={styles.content}>
-          <Text style={styles.nameText}>Richmond</Text>
+          <Text style={styles.nameText}>Jobzz Dey</Text>
           <Text style={styles.welcomeText}>Welcome back! 👋</Text>
           <Text style={styles.infoText}>Let's login. Apply to jobs</Text>
         </View>
@@ -67,6 +67,14 @@ const App = () => {
             </TouchableOpacity>
           </View>
         </View>
+
+        {/* Register Link */}
+        <View style={styles.registerContainer}>
+          <Text style={styles.registerText}>Haven't an account? </Text>
+          <TouchableOpacity>
+            <Text style={styles.registerLink}>Register</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   statusBar: {
-    height: Platform.OS === 'ios' ? 44 : 0, // iOS status bar height
+    height: Platform.OS === 'ios' ? 44 : 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -95,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    marginHorizontal: 5, // Adjusted spacing between icons
+    marginHorizontal: 5,
   },
   content: {
     padding: 20,
@@ -103,11 +111,12 @@ const styles = StyleSheet.create({
   },
   nameText: {
     fontSize: 30,
-    fontWeight: 'normal',
+    fontWeight: '600',
     marginBottom: 5,
+    color: '#356899',
   },
   welcomeText: {
-    fontSize: 24,
+    fontSize: 35,
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -131,20 +140,18 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   loginButton: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#356899',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 3,
     height: 52,
     width: '100%',
     alignItems: 'center',
-    borderRadius: 10,
   },
   loginButtonText: {
     color: '#fff',
     fontSize: 16,
     lineHeight: 35,
-    
   },
   continueWith: {
     alignItems: 'center',
@@ -162,6 +169,20 @@ const styles = StyleSheet.create({
   iconButton: {
     marginHorizontal: 10,
   },
+  registerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  registerText: {
+    fontSize: 14,
+    color: 'gray',
+  },
+  registerLink: {
+    fontSize: 14,
+    color: '#007BFF',
+  },
 });
 
-export default App;
+export default LoginScreen;
